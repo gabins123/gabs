@@ -1,6 +1,6 @@
 #include "Gabs.h"
 
-class GabsApp : public ChickenBehaviour::Application
+class GabsApp : public GabsEngine::ChickenBehaviour
 {
 public:
 	GabsApp()
@@ -13,8 +13,8 @@ public:
 	}
 };
 
-ChickenBehaviour::Application* ChickenBehaviour::CreateApplication()
+GabsEngine::ChickenBehaviour* GabsEngine::CreateApplication()
 {
-	printf("We create a new app");
+	CORE_LOG("Start");
 	return new GabsApp();
 }

@@ -1,16 +1,16 @@
 #include "Application.h"
 
-namespace ChickenBehaviour
+namespace GabsEngine
 {
-	Application::Application()
+	ChickenBehaviour::ChickenBehaviour()
 	{
 
 	}
-	Application::~Application()
+	ChickenBehaviour::~ChickenBehaviour()
 	{
 
 	}
-	void Application::Update()
+	void ChickenBehaviour::Update()
 	{
 		while (true);
 	}

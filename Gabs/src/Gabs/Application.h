@@ -1,18 +1,19 @@
 ﻿#pragma once
 #include "Core.h"
 
-namespace ChickenBehaviour
+namespace GabsEngine
 {
-	class GABS_API Application
+	class GABS_API ChickenBehaviour
 	{
 	public:
-		Application();
-		virtual ~Application();
+		ChickenBehaviour();
+		virtual ~ChickenBehaviour();
 
 		void Update();
 		
 	};
 
-	Application* CreateApplication();
+	ChickenBehaviour* CreateApplication();
+
 }
 

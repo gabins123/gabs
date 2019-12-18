@@ -1,0 +1,3 @@
+[submodule "Gabs/package/spdlog"]
+	path = Gabs/package/spdlog
+	url = http://github.com/gabime/spdlog
