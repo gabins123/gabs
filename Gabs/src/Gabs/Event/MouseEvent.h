@@ -60,20 +60,17 @@ namespace GabsEngine
 	class GABS_API MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonPressedEvent(int _button, int repeatcount)
-			: MouseButtonEvent(_button), repeatCount(repeatcount) {}
+		MouseButtonPressedEvent(int _button)
+			: MouseButtonEvent(_button) {}
 
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "MouseButtonPressedEvent: " << button << " (" << repeatCount << " repeats)";
+			ss << "MouseButtonPressedEvent: " << button << " (" << " repeats)";
 			return ss.str();
 		}
 
 		EVENT_CLASS_TYPE(MouseButtonPressed);
-
-	private:
-		int repeatCount;
 	};
 	class GABS_API MouseButtonReleasedEvent : public MouseButtonEvent
 	{

@@ -8,7 +8,10 @@
 namespace GabsEngine
 {
 	static bool isGLFWInit = false;
-
+	static void GLFWErrorCallback(int error, const char* description)
+	{
+		CORE_LOGERROR("GLFW error {0}: {1}", error, description);
+	}
 	Window* Window::Create(const WindowPros& pros)
 	{
 		return new WindowsWindow(pros);
@@ -34,7 +37,7 @@ namespace GabsEngine
 		{
 			int success = glfwInit();
 			GABS_CORE_ASSERT(success, "Coundn't Init GLFW");
-
+			glfwSetErrorCallback(GLFWErrorCallback);
 			isGLFWInit = true;
 		}
 
@@ -61,6 +64,70 @@ namespace GabsEngine
 
 			WindowsCloseEvent event;
 			data.eventCallback(event);
+		});
+		glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+		{
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+			switch (action)
+			{
+				case GLFW_PRESS:
+				{
+					KeyPressedEvent e(key, 0);
+					data.eventCallback(e);
+					break;
+				}
+				case GLFW_RELEASE:
+				{
+					KeyReleasdEvent e(key);
+					data.eventCallback(e);
+					break;
+
+				}
+				case GLFW_REPEAT:
+				{
+					KeyPressedEvent e(key, 1);
+					data.eventCallback(e);
+					break;
+				}
+			}
+		});
+		glfwSetMouseButtonCallback(window, [](GLFWwindow* window, int button,  int action, int mods)
+		{
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+			switch (action)
+			{
+				case GLFW_PRESS:
+				{
+					MouseButtonPressedEvent e(button);
+					data.eventCallback(e);
+					break;
+				}
+				case GLFW_RELEASE:
+				{
+					MouseButtonReleasedEvent e(button);
+					data.eventCallback(e);
+					break;
+				}
+			}
+		});
+
+		glfwSetScrollCallback(window, [](GLFWwindow* window, double xOffset, double yOffset)
+		{
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+			MouseScrolledEvent e((float)xOffset, (float)yOffset);
+			data.eventCallback(e);
+
+		});
+
+		glfwSetCursorPosCallback(window, [](GLFWwindow* window, double xPos, double yPos)
+		{
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+			MouseMovedEvent e((float)xPos, (float)yPos);
+			data.eventCallback(e);
 		});
 	}
 
