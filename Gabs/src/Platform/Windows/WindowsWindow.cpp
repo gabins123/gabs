@@ -1,5 +1,9 @@
 #include "gpch.h"
 #include "WindowsWindow.h"
+#include "Gabs/Event/ApplicationEvent.h"
+#include "Gabs/Event/MouseEvent.h"
+#include "Gabs/Event/KeyEvent.h"
+
 
 namespace GabsEngine
 {
@@ -18,7 +22,6 @@ namespace GabsEngine
 	{
 		Shutdown();
 	}
-
 	void WindowsWindow::Init(const WindowPros& pros)
 	{
 		data.title = pros.title;
@@ -39,6 +42,26 @@ namespace GabsEngine
 		glfwMakeContextCurrent(window);
 		glfwSetWindowUserPointer(window, &data);
 		SetVSync(true);
+
+//Set GLFW callback
+		glfwSetWindowSizeCallback(window, [](GLFWwindow* window, int _width, int _height)
+		{
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+			data.width = _width;
+			data.height = _height;
+
+			WindowsResizeEvent event(_width, _height);
+			data.eventCallback(event);
+		});
+		
+		glfwSetWindowCloseCallback(window, [](GLFWwindow* window)
+		{
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+			WindowsCloseEvent event;
+			data.eventCallback(event);
+		});
 	}
 
 	void WindowsWindow::Shutdown()

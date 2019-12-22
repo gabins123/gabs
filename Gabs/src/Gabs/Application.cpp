@@ -6,9 +6,18 @@
 #include <GLFW/glfw3.h>
 namespace GabsEngine
 {
+
+#define SET_EVENT_CALLBACK(x) std::bind(&ChickenBehaviour::x, this, std::placeholders::_1)
+
 	ChickenBehaviour::ChickenBehaviour()
 	{
 		window = std::unique_ptr<Window>(Window::Create());
+		window->SetEventCallback(SET_EVENT_CALLBACK(OnEvent));
+	}
+
+	void ChickenBehaviour::OnEvent(Event& e)
+	{
+		CORE_LOGWARNING("{0}",e);
 	}
 	ChickenBehaviour::~ChickenBehaviour()
 	{

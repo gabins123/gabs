@@ -14,6 +14,7 @@ namespace GabsEngine
 		
 		void Run();
 
+		void OnEvent(Event& e);
 	private:
 		std::unique_ptr<Window> window;
 		bool running = true;
