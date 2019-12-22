@@ -1,3 +1,6 @@
 [submodule "Gabs/package/spdlog"]
 	path = Gabs/package/spdlog
 	url = http://github.com/gabime/spdlog
+[submodule "Gabs/package/GLFW"]
+	path = Gabs/package/GLFW
+	url = https://github.com/TheCherno/GLFW

@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Core.h"
+#include "Window.h"
 
 namespace GabsEngine
 {
@@ -11,8 +12,12 @@ namespace GabsEngine
 
 		void Update();
 		
-	};
+		void Run();
 
+	private:
+		std::unique_ptr<Window> window;
+		bool running = true;
+	};
 	ChickenBehaviour* CreateApplication();
 
 }
