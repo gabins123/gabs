@@ -7,6 +7,12 @@
     <Filter Include="Gabs\Event">
       <UniqueIdentifier>{F33A25F0-DFF2-663D-48FA-3F9934D1012E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Gabs.h" />
@@ -31,23 +37,39 @@
     <ClInclude Include="src\Gabs\Event\MouseEvent.h">
       <Filter>Gabs\Event</Filter>
     </ClInclude>
+    <ClInclude Include="src\Gabs\Layer.h">
+      <Filter>Gabs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Gabs\LayerStack.h">
+      <Filter>Gabs</Filter>
+    </ClInclude>
     <ClInclude Include="src\Gabs\Log.h">
       <Filter>Gabs</Filter>
     </ClInclude>
     <ClInclude Include="src\Gabs\Window.h">
       <Filter>Gabs</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\gpch.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Gabs\Application.cpp">
       <Filter>Gabs</Filter>
     </ClCompile>
+    <ClCompile Include="src\Gabs\Layer.cpp">
+      <Filter>Gabs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Gabs\LayerStack.cpp">
+      <Filter>Gabs</Filter>
+    </ClCompile>
     <ClCompile Include="src\Gabs\Log.cpp">
       <Filter>Gabs</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
     <ClCompile Include="src\gpch.cpp" />
-    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
 </Project>

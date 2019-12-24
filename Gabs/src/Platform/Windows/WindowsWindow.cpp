@@ -16,6 +16,7 @@ namespace GabsEngine
 	{
 		return new WindowsWindow(pros);
 	}
+	
 
 	WindowsWindow::WindowsWindow(const WindowPros& pros)
 	{

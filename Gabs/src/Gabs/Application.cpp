@@ -14,15 +14,39 @@ namespace GabsEngine
 		window = std::unique_ptr<Window>(Window::Create());
 		window->SetEventCallback(SET_EVENT_CALLBACK(OnEvent));
 	}
-
+	void ChickenBehaviour::PushLayer(Layer* layer)
+	{
+		layerStack.PushLayer(layer);
+	}
+	void ChickenBehaviour::PushOverlayer(Layer* layer)
+	{
+		layerStack.PushOverlay(layer);
+	}
 	void ChickenBehaviour::OnEvent(Event& e)
 	{
-		CORE_LOGWARNING("{0}",e);
+
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<WindowsCloseEvent>(SET_EVENT_CALLBACK(OnCloseWindow));
+
+
+		for (auto it = layerStack.end(); it != layerStack.begin();)
+		{
+			(*--it)->OnEvent(e);
+			if (e.handle)
+				break;
+		}
+
 	}
 	ChickenBehaviour::~ChickenBehaviour()
 	{
 
 	}
+	bool ChickenBehaviour::OnCloseWindow(Event& e)
+	{
+		running = false;
+		return true;
+	}
+
 	void ChickenBehaviour::Update()
 	{
 		while (true);
@@ -33,6 +57,12 @@ namespace GabsEngine
 		{
 			glClearColor(0, 1,1, 1.0);
 			glClear(GL_COLOR_BUFFER_BIT);
+
+			for (Layer* layer : layerStack)
+			{
+				layer->OnUpdate();
+			}
+
 			window->OnUpdate();
 		}
 	}

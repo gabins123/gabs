@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core.h"
+#include "Gabs/Core.h"
 
 
 
@@ -31,7 +31,6 @@ namespace GabsEngine
 
 	class GABS_API Event
 	{
-		friend class EventDispatcher;
 	public:
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
@@ -42,7 +41,6 @@ namespace GabsEngine
 		{
 			return GetCatelogyFlags() & category;
 		}
-	private:
 		bool handle = false;
 	};
 

@@ -83,8 +83,9 @@
       <AdditionalIncludeDirectories>src;package\spdlog\include;package\GLFW\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -157,18 +158,22 @@
     <ClInclude Include="src\Gabs\Event\Event.h" />
     <ClInclude Include="src\Gabs\Event\KeyEvent.h" />
     <ClInclude Include="src\Gabs\Event\MouseEvent.h" />
+    <ClInclude Include="src\Gabs\Layer.h" />
+    <ClInclude Include="src\Gabs\LayerStack.h" />
     <ClInclude Include="src\Gabs\Log.h" />
     <ClInclude Include="src\Gabs\Window.h" />
-    <ClInclude Include="src\gpch.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
+    <ClInclude Include="src\gpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Gabs\Application.cpp" />
+    <ClCompile Include="src\Gabs\Layer.cpp" />
+    <ClCompile Include="src\Gabs\LayerStack.cpp" />
     <ClCompile Include="src\Gabs\Log.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\gpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="package\GLFW\GLFW.vcxproj">
