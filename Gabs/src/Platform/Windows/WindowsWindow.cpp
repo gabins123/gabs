@@ -1,8 +1,10 @@
+
 #include "gpch.h"
 #include "WindowsWindow.h"
 #include "Gabs/Event/ApplicationEvent.h"
 #include "Gabs/Event/MouseEvent.h"
 #include "Gabs/Event/KeyEvent.h"
+#include "glad/glad.h"
 
 
 namespace GabsEngine
@@ -44,6 +46,9 @@ namespace GabsEngine
 
 		window = glfwCreateWindow((int)pros.width, (int)pros.height, pros.title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(window);
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		GABS_ASSERT(status, "Failed to init glad");
+
 		glfwSetWindowUserPointer(window, &data);
 		SetVSync(true);
 

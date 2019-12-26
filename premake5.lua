@@ -12,8 +12,11 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 Includedir = {}
 Includedir["GLFW"] = "Gabs/package/GLFW/Include"
+Includedir["Glad"] = "Gabs/package/Glad/Include"
+Includedir["Glad"] = "Gabs/package/Glad/Include"
 
 include "Gabs/package/GLFW"
+include "Gabs/package/Glad"
 
 project "Gabs"
 	location "Gabs"
@@ -37,10 +40,12 @@ project "Gabs"
 	{
 		"%{prj.name}/src",
 		"Gabs/package/spdlog/include",
-		"%{Includedir.GLFW}"
+		"%{Includedir.GLFW}",
+		"%{Includedir.Glad}"
 	}
 	links
 	{
+		"Glad",
 		"GLFW",
 		"opengl32.lib"
 	}
@@ -53,7 +58,8 @@ project "Gabs"
 		defines
 		{
 			"GABS_PLATFORM_WINDOWS",
-			"GABS_BUILD_DLL"
+			"GABS_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 		postbuildcommands
 		{
@@ -62,14 +68,17 @@ project "Gabs"
 
 	filter "configurations:Debug"
 		defines "GABS_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "GABS_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "GABS_DIST"
+		buildoptions "/MD"
 		optimize "On"
 
 project "Sandbox"
@@ -109,13 +118,16 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "GABS_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "GABS_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "GABS_DIST"
+		buildoptions "/MD"
 		optimize "On"
 
